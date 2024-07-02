@@ -4,6 +4,7 @@ import java.util.*;
 
 public class Dev {
     private String nome;
+    private int meta;
     private Set<Conteudo> conteudosInscritos = new LinkedHashSet<>();
     private Set<Conteudo> conteudosConcluidos = new LinkedHashSet<>();
 
@@ -37,9 +38,27 @@ public class Dev {
                 .sum();*/
     }
 
+    public int calcularMeta(int horasPorDia) {
+        int totalHoras = 0;
+        for (Conteudo conteudo : conteudosInscritos) {
+            if (conteudo instanceof Curso) {
+                Curso curso = (Curso) conteudo;
+                totalHoras += curso.getCargaHoraria();
+            }
+        }
+        return (int) Math.ceil(totalHoras / (double) horasPorDia);
+    }
 
     public String getNome() {
         return nome;
+    }
+
+    public int getMeta() {
+        return meta;
+    }
+
+    public void setMeta(int meta) {
+        this.meta = meta;
     }
 
     public void setNome(String nome) {
